@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name truextendTestApp
@@ -8,28 +6,39 @@
  *
  * Main module of the application.
  */
-angular
-  .module('truextendTestApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+ (function(){
+
+  'use strict';
+
+  angular
+    .module('truextendTestApp', [
+      'ngAnimate',
+      'ngCookies',
+      'ngResource',
+      'ngRoute',
+      'ngSanitize',
+      'ngTouch'
+    ])
+    .config(function ($routeProvider, $locationProvider) {
+      $locationProvider.hashPrefix('');
+      $routeProvider
+        .when('/', {
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/about', {
+          templateUrl: 'views/about.html',
+          controller: 'AboutCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/courses', {
+          templateUrl: 'views/courses.html',
+          controller: 'CoursesCtrl',
+          controllerAs: 'vm'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    });
+})();
