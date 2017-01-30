@@ -1,1 +1,102 @@
-<p>This is the courses view.</p>
+<h1>Courses</h1>
+<!-- Trigger the modal with a button -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Textbooks</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="course in vm.coursesChanged">
+      <td>{{course.id}}</td>
+      <td>{{course.name}}</td>
+      <td>{{course.description}}</td>
+      <td>
+        <table class="table">
+          <tr>
+            <th>Author</th>
+            <th>Title</th>
+          </tr>
+          <tr ng-repeat="textbook in course.textbooks">
+            <td>{{textbook.author}}</td>
+            <td>{{textbook.title}}</td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="vm.selectCourse($index)">
+          <span class="glyphicon glyphicon-edit"></span> Edit
+        </button>
+      </td>
+      <td>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-success" ng-click="vm.saveSingleChanges($index)" ng-show="course.status">
+          <span class="glyphicon glyphicon-ok"></span> Save
+        </button>
+      </td>
+      <td>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-danger" ng-click="vm.discardSingleChanges($index)" ng-show="course.status">
+          <span class="glyphicon glyphicon-remove"></span> Discard
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pull-right">
+  <button type="button" class="btn btn-success" ng-click="vm.saveAllChanges()">
+    <span class="glyphicon glyphicon-ok"></span> Save All Changes
+  </button>
+
+  <button type="button" class="btn btn-danger" ng-click="vm.discardAllChanges()">
+    <span class="glyphicon glyphicon-remove"></span> Discard All Changes
+  </button>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Course</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="author">Name:</label>
+            <input type="author" class="form-control" id="author" ng-model="vm.courseSelected.name">
+          </div>
+          <div class="form-group">
+            <label for="title">Description:</label>
+            <input type="title" class="form-control" id="title" ng-model="vm.courseSelected.description">
+          </div>
+          <table class="table">
+            <tr>
+              <th>Author</th>
+              <th>Title</th>
+            </tr>
+            <tr ng-repeat="textbooks in vm.courseSelected.textbooks">
+              <td><input type="text" class="form-control" ng-model="vm.courseSelected.textbooks[$index].author"></td>
+              <td><input type="text" class="form-control" ng-model="vm.courseSelected.textbooks[$index].title"></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="vm.editCourse()">Edit</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

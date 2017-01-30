@@ -27,11 +27,6 @@
           controller: 'MainCtrl',
           controllerAs: 'vm'
         })
-        .when('/about', {
-          templateUrl: 'views/about.html',
-          controller: 'AboutCtrl',
-          controllerAs: 'vm'
-        })
         .when('/courses', {
           templateUrl: 'views/courses.html',
           controller: 'CoursesCtrl',
